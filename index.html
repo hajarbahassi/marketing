@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIYAD AUTO PRESTIGE | Excellence & Héritage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@700;900&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --red: #C8102E; --gold: #B4975A; --blue: #002349; --light: #ffffff; --dark: #0a0a0a; }
+        
+        * { box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; margin: 0; background: var(--light); color: var(--blue); overflow-x: hidden; scroll-behavior: smooth; transition: background 0.6s ease; }
+        
+        /* Bar de Prestige */
+        .top-bar { background: var(--red); color: white; text-align: center; padding: 12px; font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+        
+        /* Navigation Style Assia */
+        nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 15px 5%; border-bottom: 3px solid var(--red); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo-text { font-family: 'Bodoni Moda', serif; font-size: 1.4rem; font-weight: 900; line-height: 1; text-transform: uppercase; text-decoration: none; color: var(--blue); }
+        .logo-text span { color: var(--red); display: block; font-size: 0.7rem; letter-spacing: 3px; }
+
+        /* Hero Section Dynamique */
+        .hero { height: 85vh; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920') center/cover no-repeat; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; transition: 0.5s; }
+        .hero h1 { font-family: 'Bodoni Moda', serif; font-size: clamp(2.5rem, 8vw, 5.5rem); margin: 0; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .hero p { letter-spacing: 6px; font-weight: 700; color: var(--gold); margin-top: 20px; font-size: 1rem; }
+
+        /* Grilles & Sections */
+        .section-title { font-family: 'Bodoni Moda', serif; text-align: center; font-size: clamp(2rem, 5vw, 3.5rem); margin: 60px 0 40px; }
+        .section-title span { display: block; font-size: 0.8rem; color: var(--red); letter-spacing: 10px; text-transform: uppercase; margin-bottom: 15px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 0 8% 80px; max-width: 1500px; margin: 0 auto; justify-content: center; }
+        
+        /* Cartes Style Luxe */
+        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.05); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; border: 1px solid #f0f0f0; position: relative; }
+        .card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.15); border-color: var(--gold); }
+        .card img { width: 100%; height: 380px; object-fit: cover; transition: 0.5s; }
+        .card:hover img { scale: 1.05; }
+        .card-body { padding: 30px; text-align: center; background: white; }
+        .card-body h3 { font-family: 'Bodoni Moda'; font-size: 1.5rem; margin: 0 0 10px; }
+        .price-tag { color: var(--red); font-weight: 800; font-size: 1.2rem; display: block; }
+
+        /* Univers Vintage (Noir & Or) */
+        #vintage-ui { display: none; background: var(--dark); color: var(--gold); }
+        .vintage-active { background: var(--dark) !important; }
+        .vintage-active .card { background: #151515; border-color: #222; }
+        .vintage-active .card-body { background: #151515; color: white; }
+
+        /* Modal avec Calendrier */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,20,40,0.96); backdrop-filter: blur(15px); z-index: 10000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: white; padding: 40px; border-radius: 25px; width: 100%; max-width: 450px; position: relative; animation: slideUp 0.4s ease; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; font-weight: 700; color: var(--blue); margin-bottom: 8px; font-size: 0.9rem; }
+        .form-group input { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 12px; font-family: 'Outfit'; font-size: 1rem; transition: 0.3s; }
+        .form-group input:focus { border-color: var(--gold); outline: none; }
+        
+        .btn-whatsapp { background: #25d366; color: white; width: 100%; padding: 18px; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
+
+        /* Bouton Switch Flottant */
+        .switch-container { position: fixed; bottom: 40px; right: 40px; z-index: 9999; }
+        .switch-btn { width: 80px; height: 80px; background: var(--gold); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; cursor: pointer; border: 4px solid white; box-shadow: 0 15px 35px rgba(0,0,0,0.3); transition: 0.4s; }
+        .switch-btn:hover { transform: rotate(360deg) scale(1.1); }
+
+        footer { background: var(--blue); color: white; padding: 80px 5%; text-align: center; border-top: 6px solid var(--gold); }
+    </style>
+</head>
+<body>
+
+<div style="display:none">
+    <div id="jazz-player"></div>
+    <audio id="vintage-audio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<div class="top-bar">Le prestige n'a pas d'âge, il a une adresse.</div>
+
+<nav>
+    <a href="#" class="logo-text">RIYAD AUTO<span>PRESTIGE RABAT</span></a>
+    <div style="display:flex; gap:30px; font-weight:700; font-size:0.85rem; letter-spacing:1px;">
+        <a href="#modern-ui" style="text-decoration:none; color:inherit;">L'ART MODERNE</a>
+        <a href="javascript:void(0)" onclick="toggleUniverse()" style="text-decoration:none; color:inherit;">HÉRITAGE</a>
+    </div>
+</nav>
+
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <span style="position:absolute; right:25px; top:20px; cursor:pointer; font-size:2rem; color:#ccc;" onclick="closeModal()">&times;</span>
+        <h3 id="modalTitle" style="font-family:'Bodoni Moda'; font-size:2rem; margin:0 0 10px;">Réservation</h3>
+        <p id="modalCar" style="color:var(--red); font-weight:700; margin-bottom:25px; letter-spacing:1px;"></p>
+        
+        <div class="form-group">
+            <label>Votre Nom Complet</label>
+            <input type="text" id="clientName" placeholder="M. Ahmed Alami">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+            <div class="form-group">
+                <label>Début</label>
+                <input type="date" id="dateStart">
+            </div>
+            <div class="form-group">
+                <label>Fin</label>
+                <input type="date" id="dateEnd">
+            </div>
+        </div>
+
+        <button class="btn-whatsapp" onclick="sendWhatsApp()">
+            <i class="fab fa-whatsapp"></i> DEMANDER SUR WHATSAPP
+        </button>
+    </div>
+</div>
+
+<div id="modern-ui">
+    <section class="hero">
+        <p>CONCIERGERIE DE LUXE • HAY RIYAD</p>
+        <h1>L'ÉLITE À RABAT</h1>
+    </section>
+
+    <h2 class="section-title"><span>La Flotte</span>LUXE MODERNE</h2>
+    <div class="grid">
+        <div class="card" onclick="openModal('Skoda Octavia 2024', '500 DH')">
+            <img src="https://images.unsplash.com/photo-1606152424102-0caee462ca2a?auto=format&fit=crop&w=800">
+            <div class="card-body">
+                <h3>Skoda Octavia 2024</h3>
+                <span class="price-tag">500 DH / Jour</span>
+            </div>
+        </div>
+        <div class="card" onclick="openModal('Ford Mustang GT V8', '1200 DH')">
+            <img src="https://images.unsplash.com/photo-1584345604482-8135833951f9?auto=format&fit=crop&w=800">
+            <div class="card-body">
+                <h3>Ford Mustang GT V8</h3>
+                <span class="price-tag">1200 DH / Jour</span>
+            </div>
+        </div>
+        <div class="card" onclick="openModal('BMW M-Sport Luxe', '900 DH')">
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800">
+            <div class="card-body">
+                <h3>BMW M-Sport Luxe</h3>
+                <span class="price-tag">900 DH / Jour</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="vintage-ui">
+    <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1920');">
+        <p style="color:var(--gold)">ÉDITIONS LIMITÉES & MARIAGES</p>
+        <h1 style="color:var(--gold)">COLLECTION HÉRITAGE</h1>
+    </section>
+
+    <h2 class="section-title"><span>Trésors</span>VINTAGE</h2>
+    <div class="grid">
+        <div class="card" onclick="openModal('Mercedes S-Class W140', '1500 DH')">
+            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800">
+            <div class="card-body">
+                <h3>Mercedes S-Class W140</h3>
+                <span class="price-tag">1500 DH / Jour</span>
+            </div>
+        </div>
+        <div class="card" onclick="openModal('Wedding Special Edition', 'Sur Devis')">
+            <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800">
+            <div class="card-body">
+                <h3>Pack Mariage Héritage</h3>
+                <span class="price-tag">Sur Devis</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="switch-container" title="Changer d'univers">
+    <div class="switch-btn" onclick="toggleUniverse()"><i class="fas fa-history"></i></div>
+</div>
+
+<footer>
+    <div class="logo-text" style="color:white; margin-bottom:30px; font-size:2rem;">RIYAD AUTO<span style="color:var(--gold)">PRESTIGE</span></div>
+    <p>Avenue Al Nakhil, Hay Riyad, Rabat, Maroc</p>
+    <p style="opacity:0.6; margin-top:20px;">© 2024 Riyad Auto Prestige - L'Excellence Automobile</p>
+</footer>
+
+<script>
+    let isVintage = false;
+    let playerJazz;
+    let selectedCar = "";
+
+    // YouTube API pour le Jazz (Inspiré par le design fluide du site Assia)
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    function onYouTubeIframeAPIReady() {
+        playerJazz = new YT.Player('jazz-player', {
+            height: '0', width: '0', videoId: 'nv_2rz5BFDA',
+            playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'nv_2rz5BFDA' },
+            events: { 'onReady': (e) => { e.target.setVolume(50); e.target.playVideo(); } }
+        });
+    }
+
+    function toggleUniverse() {
+        isVintage = !isVintage;
+        const mod = document.getElementById('modern-ui');
+        const vin = document.getElementById('vintage-ui');
+        const vAudio = document.getElementById('vintage-audio');
+        
+        if(isVintage) {
+            mod.style.display='none'; vin.style.display='block';
+            document.body.classList.add('vintage-active');
+            if(playerJazz) playerJazz.pauseVideo();
+            vAudio.play();
+        } else {
+            mod.style.display='block'; vin.style.display='none';
+            document.body.classList.remove('vintage-active');
+            vAudio.pause();
+            if(playerJazz) playerJazz.playVideo();
+        }
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function openModal(car, price) {
+        selectedCar = car;
+        document.getElementById('modalCar').innerText = car.toUpperCase() + " • " + price;
+        document.getElementById('bookingModal').style.display = 'flex';
+    }
+
+    function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
+
+    function sendWhatsApp() {
+        const name = document.getElementById('clientName').value;
+        const start = document.getElementById('dateStart').value;
+        const end = document.getElementById('dateEnd').value;
+        
+        if(!name || !start || !end) {
+            alert("Veuillez renseigner votre nom et vos dates de prestige.");
+            return;
+        }
+
+        const msg = `Bonjour Riyad Auto Prestige, je suis ${name}. Je souhaite réserver la *${selectedCar}* pour la période du ${start} au ${end}. Est-elle disponible ?`;
+        window.open(`https://wa.me/212628875855?text=${encodeURIComponent(msg)}`, '_blank');
+        closeModal();
+    }
+
+    // Fermeture au clic extérieur
+    window.onclick = function(e) { if(e.target == document.getElementById('bookingModal')) closeModal(); }
+</script>
+</body>
+</html>
